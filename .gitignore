@@ -1,0 +1,18 @@
+# environment
+.venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+.ipynb_checkpoints/
+
+# problem zip contains the raw data
+*.zip
+
+# assignment handouts (kept locally, not part of our code)
+PROBLEM.md
+STUDENT_HANDBOOK.md
+GROUP.md
+
+# MLflow model files (mlflow.db itself is committed)
+mlruns/
+mlartifacts/
