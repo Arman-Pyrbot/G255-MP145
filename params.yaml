@@ -4,3 +4,30 @@ data:
   holdout: data/raw/holdout_features.csv
 
 target: gb_per_day
+
+# Cleaning rules. Each one matches a finding in reports/findings.yaml.
+clean:
+  leaking_column: gb_from_monthly_bill
+  sentinel_column: age
+  sentinel_value: -999
+  unit_column: plan_gb_limit
+  unit_group: Semi-urban
+  unit_factor: 1024
+  stuck_column: video_minutes
+  stuck_value: 152
+  stuck_start: "2026-05-09"
+  stuck_end: "2026-05-23"
+
+features:
+  numeric: [age, screen_hours, apps_installed, plan_gb_limit, video_minutes, wifi_hours]
+  categorical: [phone_tier, circle]
+
+train:
+  test_size: 0.2
+  random_state: 42
+  cv_folds: 5
+  candidates:
+    - {model: linear}
+    - {model: tree, max_depth: 4}
+    - {model: tree, max_depth: 8}
+    - {model: forest, n_estimators: 50, max_depth: 8}

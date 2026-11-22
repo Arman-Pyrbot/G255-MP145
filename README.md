@@ -37,3 +37,20 @@ py -3.12 -m venv .venv
 pip install -r requirements.txt
 pip install dvc
 ```
+
+## Run
+
+Tests (no CSV files needed):
+
+```
+.venv\Scripts\python.exe -m pytest
+```
+
+Training. Cleans `data/raw/train.csv`, trains 4 candidate models, logs each run to `mlflow.db`, and registers the best one as `champion`:
+
+```
+$env:PYTHONPATH = "src"
+.venv\Scripts\python.exe -m mp145.train
+```
+
+Cleaning rules are in `src/mp145/clean.py`, with settings in `params.yaml`. The data checks that produced `reports/findings.yaml` are in `src/mp145/data_checks.py`.
